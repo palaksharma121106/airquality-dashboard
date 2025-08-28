@@ -1,268 +1,316 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Palak Sharma | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Palak Sharma — Portfolio</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #fff1eb, #ace0f9);
-      color: #2b2d42;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
-    header {
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      color: #2b2d42;
-      padding: 3rem 0;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-    }
-    nav {
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      padding: 1rem;
-      gap: 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0; 
-      z-index: 1000;
-    }
-    nav a {
-      color: #1d3557;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ff6b81;
-    }
-    section {
-      padding: 4rem 10%;
-    }
-    .section-title {
-      font-size: 2.2rem;
-      color: #1d3557;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: #ff6b81;
-      margin-top: 8px;
-      border-radius: 2px;
-    }
-    .skills, .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .projects .card h3 {
-  font-weight: bold;
-}
-
-.projects .card p {
-  font-weight: normal;
-}
-    footer {
-      text-align: center;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      color: #2b2d42;
-      padding: 2rem 0;
-      font-size: 0.95rem;
-    }
-    .quote {
-      font-style: italic;
-      color: #8e5a66;
-      margin-top: 2rem;
-      text-align: center;
-    }
-    a {
-      color: #1d3557;
-    }
-    a:hover {
-      text-decoration: underline;
+    :root{
+      --bg:#07060a;
+      --panel: rgba(255,255,255,0.03);
+      --muted:#9aa4b2;
+      --accent:#8b5cf6;      /* purple */
+      --accent-2:#00d4ff;    /* cyan */
+      --glass-border: rgba(255,255,255,0.06);
+      --radius:16px;
+      --maxw:1100px;
     }
 
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 1rem;
-      background: #ffffffcc;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(139,92,246,0.10), transparent 8%),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(0,212,255,0.06), transparent 8%),
+                  var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
     }
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      font-family: 'Poppins', sans-serif;
+
+    .container{max-width:var(--maxw);margin:0 auto;padding:48px 20px 120px;}
+
+    /* Header / Nav */
+    header{
+      position:sticky;top:14px;z-index:60;
+      display:flex;align-items:center;justify-content:space-between;
+      margin: 0 auto; max-width:var(--maxw); padding:12px 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px; border:1px solid var(--glass-border);
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(8px);
     }
-    button[type="submit"] {
-      background: #ff6b81;
-      color: white;
-      padding: 0.7rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo {
+      width:44px;height:44px;border-radius:10px;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#071022;
+      box-shadow: 0 6px 18px rgba(139,92,246,0.18), inset 0 -6px 14px rgba(0,0,0,0.15);
     }
-    button[type="submit"]:hover {
-      background: #e85c72;
+    .brand h1{font-size:1rem;font-weight:700;letter-spacing:0.2px}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600;font-size:0.95rem}
+    nav a:hover{color: #fff; text-decoration: none}
+    .nav-right{display:flex;align-items:center}
+
+    /* Hero */
+    .hero{
+      display:flex;gap:36px;align-items:center;margin-top:42px;
+      padding:36px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--glass-border);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
     }
+    .hero-left{flex:1;min-width:260px}
+    .avatar{
+      width:140px;height:140px;border-radius:18px;overflow:hidden;
+      border: 3px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(139,92,246,0.12);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .intro{
+      margin-left:22px;color:var(--muted);
+    }
+    .title{
+      font-size:1.9rem;font-weight:700;color:#ffffff;margin-bottom:6px;
+      letter-spacing:0.2px;
+    }
+    .subtitle{color:var(--accent-2);font-weight:600;margin-bottom:10px}
+    .blurb{color:var(--muted);max-width:640px}
+
+    /* Stats / quick buttons */
+    .cta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#071022;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none;border:none;
+      box-shadow: 0 8px 30px rgba(139,92,246,0.12);
+    }
+    .ghost{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:600;
+    }
+
+    /* Experience + Projects layout */
+    .grid{display:grid;grid-template-columns: 1fr 420px;gap:28px;margin-top:32px}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr; } .hero{flex-direction:column; align-items:flex-start} .intro{margin-left:0;margin-top:14px} }
+
+    /* Left column cards */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border); padding:20px; border-radius:14px;
+      box-shadow: 0 14px 40px rgba(2,6,23,0.6);
+    }
+    .work-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    @media(max-width:700px){ .work-list{grid-template-columns:1fr} }
+
+    .work {
+      background: linear-gradient(180deg, rgba(139,92,246,0.06), rgba(0,212,255,0.02));
+      padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;gap:8px;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .work:hover{ transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.6)}
+    .work h4{font-size:0.95rem;margin-bottom:6px}
+    .work p{color:var(--muted);font-size:0.86rem}
+
+    /* Right column: Featured */
+    .right-col .feature{
+      height:100%; display:flex;flex-direction:column;gap:16px;
+    }
+    .feature .big{
+      background: radial-gradient(600px 200px at 20% 20%, rgba(139,92,246,0.12), transparent),
+                  linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:20px;border:1px solid var(--glass-border);
+      display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;
+    }
+    .feature .big h3{color:#fff;margin-bottom:6px}
+    .feature .big p{color:var(--muted);font-size:0.92rem}
+
+    /* Projects section */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+    .project-card{
+      background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));
+      border:1px solid var(--glass-border); padding:16px;border-radius:12px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .project-card:hover{ transform: translateY(-8px); box-shadow: 0 30px 70px rgba(2,6,23,0.6)}
+    .project-card h4{margin-bottom:8px}
+    .project-card p{color:var(--muted);font-size:0.9rem}
+
+    /* Skills */
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .chip{
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      padding:8px 12px;border-radius:999px;border:1px solid var(--glass-border);
+      color: #dfefff;font-weight:600;font-size:0.9rem;
+    }
+
+    /* Contact footer */
+    footer{margin-top:40px;padding:28px;text-align:center;color:var(--muted);font-size:0.95rem}
+    footer a{color:var(--accent-2);text-decoration:none;font-weight:700}
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:0.92rem}
+    .mini{font-size:0.85rem;color:var(--muted)}
+    .flex{display:flex;align-items:center;gap:12px}
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Palak Sharma</h1>
-    <p>B.Tech CSE (3rd Year) | Developer | AI Enthusiast </p>
-  </header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <p>Hello! I'm Palak Sharma, a 3rd year B.Tech CSE student at Mody University (2023–2027), CGPA: 8.77.
-       My journey into tech is inspired by curiosity, driven by creativity, and supported by code. I recently
-        built an AI-powered Resume & Cover Letter Generator using OpenAI. I love working on real-world problems and bringing ideas to life.</p>
-    <p class="quote">"I don't just write code, I craft experiences that leave an impact."</p>
-  </section>
-
- <section id="skills">
-  <h2 class="section-title">Skills</h2>
-
-  <h3 class="section-subtitle">🛠️ Technical Skills</h3>
-  <div class="skills">
-    <div class="card">HTML & CSS</div>
-    <div class="card">JavaScript (Basic)</div>
-    <div class="card">Java</div>
-    <div class="card">C</div>
-    <div class="card">C++</div>
-    <div class="card">Python (Basics)</div>
-    <div class="card">GUI Programming (Java Swing)</div>
-    <div class="card">OOP Concepts</div>
-    <div class="card">DBMS (Basic)</div>
-    <div class="card">DSA (Foundations)</div>
-  </div>
-
-  <h3 class="section-subtitle">💻 Tools & Platforms</h3>
-  <div class="skills">
-    <div class="card">Git</div>
-    <div class="card">GitHub</div>
-    <div class="card">VS Code</div>
-    <div class="card">Replit</div>
-    <div class="card">Streamlit</div>
-    <div class="card">Canva</div>
-    <div class="card">OpenAI API</div>
-  </div>
-
-  <h3 class="section-subtitle">🧠 Core Concepts</h3>
-  <div class="skills">
-    <div class="card">Problem Solving</div>
-    <div class="card">Debugging</div>
-    <div class="card">Version Control</div>
-    <div class="card">Responsive Design</div>
-  </div>
-
-  <h3 class="section-subtitle">✨ Soft Skills</h3>
-  <div class="skills">
-    <div class="card">Communication</div>
-    <div class="card">Team Collaboration</div>
-    <div class="card">Creativity</div>
-    <div class="card">Time Management</div>
-    <div class="card">Adaptability</div>
-  </div>
-</section>
-
-<style>
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem 2rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-}
-
-.card {
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 1rem 1.5rem;
-  font-weight: 600;
-  color: #2b2d42;
-  transition: transform 0.3s ease;
-  min-width: 180px;
-  text-align: center;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-</style>
-
-
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3>✨ AI Resume & Cover Letter Generator (2025)</h3>
-        <p>Created a smart resume generator using Streamlit & OpenAI. It crafts personalized resumes and cover letters 
-          based on user input — built with custom CSS, HTML templates, and Generative AI.</p>
-      </div>
-      <div class="card">
-        <h3>🧠 Soul Sense EQ Exam</h3>
-        <p>Java GUI program to assess emotional intelligence using a 20-question rating system and average scoring.</p>
-      </div>
-      <div class="card">
-        <h3>🔁 Unit Converter</h3>
-        <p>Java Swing GUI app to convert units of temperature, length, time, and weight. Built with conditionals and intuitive UI.</p>
-      </div>
-      <div class="card">
-        <h3>📘 Student Record Management</h3>
-        <p>C++ console-based CRUD app for managing student data using classes and STL vectors. Features include add, search, update, and delete.</p>
+    <div class="brand">
+      <div class="logo">P</div>
+      <div>
+        <h1>Palak Sharma</h1>
+        <div class="mini muted">B.Tech CSE • 3rd year • AI & Web</div>
       </div>
     </div>
-  </section>
 
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <form action="https://formspree.io/f/mrbllzvj" method="POST">
-      <label for="name">Name</label><br>
-      <input type="text" id="name" name="name" required><br><br>
+    <nav class="nav-right">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-      <label for="email">Email</label><br>
-      <input type="email" id="email" name="email" required><br><br>
+  <main class="container">
 
-      <label for="message">Message</label><br>
-      <textarea id="message" name="message" rows="5" required></textarea><br><br>
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div style="display:flex;gap:20px;align-items:center;width:100%">
+        <div class="avatar card" style="min-width:140px;min-height:140px;overflow:hidden">
+          <!-- Replace src with your photo -->
+          <img src="images/WhatsApp Image 2025-02-24 at 01.10.07.jpeg" alt="Palak">
+        </div>
 
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+        <div class="hero-left">
+          <div class="title">Hi — I'm <span style="color:var(--accent)">Palak Sharma</span></div>
+          <div class="subtitle">Developer • AI Enthusiast • Problem Solver</div>
+          <p class="blurb">Motivated Computer Science undergraduate with practical projects in AI resume generation and data analytics. I build clean, production-minded frontends and data-backed tools that solve real problems.</p>
 
-  <footer>
-    <p> -You can also connect with me on 
-   <a href="http://linkedin.com/in/palak-n-sharma" target="_blank">LinkedIn</a> 
-   for collaborations and opportunities.
-</p>
+          <div class="cta-row">
+            <a class="btn" href="https://github.com/palaksharma121106" target="_blank">View GitHub</a>
+          </div>
 
-  </footer>
+          <div style="margin-top:16px" class="mini muted">Open for Work opportunities</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID: Work + feature -->
+    <section class="grid" id="work">
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom:12px">Work Experience</h3>
+          <div class="work-list">
+            <div class="work">
+              <h4>Summer Intern — Shadowfox</h4>
+              <p class="muted">Worked on frontend features and client projects. Focus on responsive UI and user experience.</p>
+            </div>
+            <div class="work">
+              <h4>Open Source Contributions</h4>
+              <p class="muted">Small utilities & UI fixes; active on GitHub for code collaboration and version control.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3 style="margin-bottom:12px">Featured Projects</h3>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <h4>AI Resume & Cover Letter Generator</h4>
+              <p>Generative AI + Streamlit GUI that produces tailored resumes and cover letters optimized for ATS.</p>
+              <div style="margin-top:10px" class="flex">
+                <a class="btn" href="https://github.com/palaksharma121106/ai-resume-cover-letter-generator" target="_blank">Link</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h4>SmartShop Analytics DB</h4>
+              <p>Normalized MySQL schema, triggers, and views for sales & customer analytics. Includes demo queries.</p>
+              <div style="margin-top:10px" class="flex">
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h4>Personal Portfolio Website</h4>
+              <p>Responsive, accessible portfolio showcasing projects and contact—built with modern HTML/CSS best practices.</p>
+              <div style="margin-top:10px" class="flex">
+                <a class="btn" href="https://github.com/palaksharma121106/portfolio" target="_blank">Link</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <aside class="right-col">
+        <div class="feature card">
+          <div class="big">
+            <h3>Skills & Tools</h3>
+            <p class="muted">Core technical strengths and tools I use day-to-day.</p>
+
+            <div class="skills" style="margin-top:12px">
+              <div class="chip">HTML & CSS</div>
+              <div class="chip">Java</div>
+              <div class="chip">Python</div>
+              <div class="chip">C</div>
+              <div class="chip">C++</div>
+              <div class="chip">MySQL / DBMS</div>
+              <div class="chip">Data Structures</div>
+              <div class="chip">Replit</div>
+              <div class="chip">Git / GitHub</div>
+              <div class="chip">OOPs</div>
+            </div>
+
+            <div style="margin-top:14px;">
+              <strong class="mini muted">Methodologies:</strong>
+              <div class="mini" style="margin-top:8px">SDLC • Responsive Design • Accessibility (WCAG basics)</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin-bottom:8px">Education</h4>
+            <p class="mini muted">B.Tech, Computer Science — Mody University (2023–2027) • CGPA: 8.74</p>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin-bottom:8px">Contact</h4>
+            <p class="mini muted">palaksharma121106@gmail.com</p>
+            <div style="margin-top:8px">
+              <a class="ghost" href="http://linkedin.com/in/palak-n-sharma" target="_blank">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer id="contact">
+      <p>Interested in working together? Reach out at <a href="mailto:palaksharma121106@gmail.com">palaksharma121106@gmail.com</a> — I’m open to internships and Work.</p>
+      <p style="margin-top:10px" class="muted">© <span id="year"></span> Palak Sharma — Built with HTML & CSS</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // small niceties
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // smooth scroll for anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          const el = document.querySelector(href);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        }
+      })
+    });
+  </script>
 </body>
 </html>
+
