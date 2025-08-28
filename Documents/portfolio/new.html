@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EQ Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff0f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #d63384;
+            text-align: center;
+        }
+        .question {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>EQ Test</h2>
+    <form id="eqForm">
+        <div class="question">
+            <label>1. I stay calm under pressure.</label>
+            <input type="number" min="1" max="5" required>
+        </div>
+        <div class="question">
+            <label>2. I understand others' emotions.</label>
+            <input type="number" min="1" max="5" required>
+        </div>
+        <div class="question">
+            <label>3. I express my feelings clearly.</label>
+            <input type="number" min="1" max="5" required>
+        </div>
+        <div class="question">
+            <label>4. I adapt to change easily.</label>
+            <input type="number" min="1" max="5" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+
