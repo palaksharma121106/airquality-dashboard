@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import CitySelector from "@/components/CitySelector";
 import CityDashboard from "@/components/CityDashboard";
+import StatsBanner from "@/components/StatsBanner";
 
 async function getCities() {
   const headersList = await headers();
@@ -22,15 +23,19 @@ export default async function Home() {
   const cities = await getCities();
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="border-b border-zinc-200 bg-white px-6 py-8 shadow-sm">
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900">
-          AirSense India
-        </h1>
-        <p className="mt-2 text-zinc-600">
-          Real-time air quality across 8 major Indian cities
-        </p>
+    <div className="min-h-screen bg-[#0a0f1e]">
+      <header className="bg-[#0d1428] border-b border-blue-900 px-8 py-8">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="text-4xl font-bold text-white tracking-tight">
+            AirSense India 🌬️
+          </h1>
+          <p className="mt-2 text-blue-300 text-lg">
+            AI-powered real-time air quality intelligence across major Indian cities
+          </p>
+        </div>
       </header>
+
+      <StatsBanner />
 
       <main className="mx-auto w-full max-w-6xl p-6">
         <CityDashboard cities={cities} CitySelector={CitySelector} />
