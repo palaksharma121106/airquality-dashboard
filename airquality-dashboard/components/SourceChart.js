@@ -11,10 +11,17 @@ import {
 } from "recharts";
 
 const SOURCE_COLORS = {
-  Vehicles: "#3b82f6",
-  Industries: "#8b5cf6",
-  Construction: "#f59e0b",
-  Others: "#64748b",
+  Vehicles: "#2563eb",
+  Industries: "#7c3aed",
+  Construction: "#ea580c",
+  Others: "#475569",
+};
+
+const SOURCE_EMOJIS = {
+  Vehicles: "🚗",
+  Industries: "🏭",
+  Construction: "🏗️",
+  Others: "🌫️",
 };
 
 const SOURCE_SPLITS = {
@@ -53,44 +60,73 @@ export default function SourceChart({ mainSource }) {
   const data = useMemo(() => getSourceData(mainSource), [mainSource]);
 
   return (
-    <div className="w-full rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-      <h3 className="mb-6 text-lg font-bold tracking-tight text-zinc-900">
-        Pollution Sources
-      </h3>
+    <div className="group w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="h-1.5 bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 transition-all duration-300" />
 
-      <ResponsiveContainer width="100%" height={280}>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="45%"
-            innerRadius={55}
-            outerRadius={90}
-            paddingAngle={2}
-          >
-            {data.map((entry) => (
-              <Cell key={entry.name} fill={SOURCE_COLORS[entry.name]} />
-            ))}
-          </Pie>
-          <Tooltip
-            contentStyle={{
-              borderRadius: "8px",
-              border: "1px solid #e4e4e7",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
-            }}
-            formatter={(value) => [`${value}%`, "Share"]}
-          />
-          <Legend
-            verticalAlign="bottom"
-            iconType="circle"
-            formatter={(value) => (
-              <span className="text-sm text-zinc-700">{value}</span>
-            )}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+      <div className="space-y-6 p-8">
+        <div className="flex items-center justify-between">
+          <h3 className="flex items-center gap-2 text-lg font-bold tracking-tight text-zinc-900">
+            <span className="text-xl" aria-hidden="true">
+              🌍
+            </span>
+            Pollution Sources
+          </h3>
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-500 transition-colors duration-300 group-hover:bg-zinc-200">
+            {SOURCE_EMOJIS[mainSource] ?? "💨"} {mainSource}
+          </span>
+        </div>
+
+        <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-slate-50 p-4 ring-1 ring-zinc-100 transition-all duration-300">
+          <ResponsiveContainer width="100%" height={280}>
+            <PieChart>
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="45%"
+                innerRadius={58}
+                outerRadius={92}
+                paddingAngle={3}
+                animationDuration={800}
+                animationBegin={0}
+              >
+                {data.map((entry) => (
+                  <Cell
+                    key={entry.name}
+                    fill={SOURCE_COLORS[entry.name]}
+                    stroke="#fff"
+                    strokeWidth={2}
+                    className="transition-opacity duration-300 hover:opacity-80"
+                  />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{
+                  borderRadius: "12px",
+                  border: "1px solid #e2e8f0",
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+                  padding: "10px 14px",
+                }}
+                formatter={(value, name) => [
+                  `${value}%`,
+                  `${SOURCE_EMOJIS[name] ?? ""} ${name}`,
+                ]}
+              />
+              <Legend
+                verticalAlign="bottom"
+                iconType="circle"
+                iconSize={10}
+                formatter={(value) => (
+                  <span className="ml-1 text-sm font-medium text-zinc-700">
+                    {SOURCE_EMOJIS[value]} {value}
+                  </span>
+                )}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   );
 }

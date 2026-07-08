@@ -24,3 +24,80 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes spinner-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-orbit-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spinner-pulse-ring {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes spinner-text-shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-dot-orbit {
+  0% {
+    transform: rotate(0deg) translateX(52px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(52px) rotate(-360deg);
+  }
+}
+
+.animate-spinner-orbit {
+  animation: spinner-orbit 1.4s linear infinite;
+}
+
+.animate-spinner-orbit-reverse {
+  animation: spinner-orbit-reverse 2s linear infinite;
+}
+
+.animate-spinner-pulse-ring {
+  animation: spinner-pulse-ring 2.4s ease-in-out infinite;
+}
+
+.animate-spinner-float {
+  animation: spinner-float 2s ease-in-out infinite;
+}
+
+.animate-spinner-text-shimmer {
+  animation: spinner-text-shimmer 2s ease-in-out infinite;
+}
+
+.animate-spinner-dot-orbit {
+  animation: spinner-dot-orbit 3s linear infinite;
+}
