@@ -60,23 +60,23 @@ export default function SourceChart({ mainSource }) {
   const data = useMemo(() => getSourceData(mainSource), [mainSource]);
 
   return (
-    <div className="group w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="group w-full overflow-hidden rounded-2xl border border-blue-500/30 bg-[#0d1428] shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(59,130,246,0.25)]">
       <div className="h-1.5 bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 transition-all duration-300" />
 
       <div className="space-y-6 p-8">
         <div className="flex items-center justify-between">
-          <h3 className="flex items-center gap-2 text-lg font-bold tracking-tight text-zinc-900">
+          <h3 className="flex items-center gap-2 text-lg font-bold tracking-tight text-white">
             <span className="text-xl" aria-hidden="true">
               🌍
             </span>
             Pollution Sources
           </h3>
-          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-500 transition-colors duration-300 group-hover:bg-zinc-200">
+          <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-medium text-blue-300 transition-colors duration-300 group-hover:bg-blue-500/30">
             {SOURCE_EMOJIS[mainSource] ?? "💨"} {mainSource}
           </span>
         </div>
 
-        <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-slate-50 p-4 ring-1 ring-zinc-100 transition-all duration-300">
+        <div className="rounded-xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-4 ring-1 ring-blue-500/20 transition-all duration-300">
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie
@@ -95,7 +95,7 @@ export default function SourceChart({ mainSource }) {
                   <Cell
                     key={entry.name}
                     fill={SOURCE_COLORS[entry.name]}
-                    stroke="#fff"
+                    stroke="#0d1428"
                     strokeWidth={2}
                     className="transition-opacity duration-300 hover:opacity-80"
                   />
@@ -104,10 +104,13 @@ export default function SourceChart({ mainSource }) {
               <Tooltip
                 contentStyle={{
                   borderRadius: "12px",
-                  border: "1px solid #e2e8f0",
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+                  border: "1px solid #3b82f6",
+                  backgroundColor: "#0d1428",
+                  boxShadow: "0 8px 24px rgba(59,130,246,0.3)",
                   padding: "10px 14px",
                 }}
+                labelStyle={{ color: "#93c5fd" }}
+                itemStyle={{ color: "#fff" }}
                 formatter={(value, name) => [
                   `${value}%`,
                   `${SOURCE_EMOJIS[name] ?? ""} ${name}`,
@@ -118,7 +121,7 @@ export default function SourceChart({ mainSource }) {
                 iconType="circle"
                 iconSize={10}
                 formatter={(value) => (
-                  <span className="ml-1 text-sm font-medium text-zinc-700">
+                  <span className="ml-1 text-sm font-medium text-blue-300">
                     {SOURCE_EMOJIS[value]} {value}
                   </span>
                 )}

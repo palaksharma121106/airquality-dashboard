@@ -48,9 +48,9 @@ function getLineColor(aqiValue) {
 }
 
 function getFillColor(aqiValue) {
-  if (aqiValue > 200) return "#ffe4e6";
-  if (aqiValue > 100) return "#fef3c7";
-  return "#d1fae5";
+  if (aqiValue > 200) return "rgba(244,63,94,0.15)";
+  if (aqiValue > 100) return "rgba(245,158,11,0.15)";
+  return "rgba(16,185,129,0.15)";
 }
 
 export default function ForecastChart({ aqiValue }) {
@@ -59,7 +59,7 @@ export default function ForecastChart({ aqiValue }) {
   const fillColor = getFillColor(aqiValue);
 
   return (
-    <div className="group w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="group w-full overflow-hidden rounded-2xl border border-blue-500/30 bg-[#0d1428] shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(59,130,246,0.25)]">
       <div
         className="h-1.5 transition-colors duration-300"
         style={{ backgroundColor: lineColor }}
@@ -67,18 +67,18 @@ export default function ForecastChart({ aqiValue }) {
 
       <div className="space-y-6 p-8">
         <div className="flex items-center justify-between">
-          <h3 className="flex items-center gap-2 text-lg font-bold tracking-tight text-zinc-900">
+          <h3 className="flex items-center gap-2 text-lg font-bold tracking-tight text-white">
             <span className="text-xl" aria-hidden="true">
               📊
             </span>
             24 Hour AQI Forecast
           </h3>
-          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-500 transition-colors duration-300 group-hover:bg-zinc-200">
+          <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-medium text-blue-300 transition-colors duration-300 group-hover:bg-blue-500/30">
             ⏰ Hourly
           </span>
         </div>
 
-        <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-slate-50 p-4 ring-1 ring-zinc-100 transition-all duration-300">
+        <div className="rounded-xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-4 ring-1 ring-blue-500/20 transition-all duration-300">
           <ResponsiveContainer width="100%" height={280}>
             <ComposedChart
               data={data}
@@ -86,30 +86,30 @@ export default function ForecastChart({ aqiValue }) {
             >
               <defs>
                 <linearGradient id="aqiGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={lineColor} stopOpacity={0.25} />
-                  <stop offset="100%" stopColor={fillColor} stopOpacity={0.05} />
+                  <stop offset="0%" stopColor={lineColor} stopOpacity={0.4} />
+                  <stop offset="100%" stopColor={fillColor} stopOpacity={0.1} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#3b82f6" vertical={false} strokeOpacity={0.2} />
               <XAxis
                 dataKey="hour"
                 ticks={[0, 3, 6, 9, 12, 15, 18, 21]}
                 tickFormatter={formatHourLabel}
-                stroke="#94a3b8"
-                tick={{ fill: "#64748b", fontSize: 12 }}
-                axisLine={{ stroke: "#cbd5e1" }}
-                tickLine={{ stroke: "#cbd5e1" }}
+                stroke="#3b82f6"
+                tick={{ fill: "#93c5fd", fontSize: 12 }}
+                axisLine={{ stroke: "#3b82f6", strokeOpacity: 0.3 }}
+                tickLine={{ stroke: "#3b82f6", strokeOpacity: 0.3 }}
               />
               <YAxis
-                stroke="#94a3b8"
-                tick={{ fill: "#64748b", fontSize: 12 }}
-                axisLine={{ stroke: "#cbd5e1" }}
-                tickLine={{ stroke: "#cbd5e1" }}
+                stroke="#3b82f6"
+                tick={{ fill: "#93c5fd", fontSize: 12 }}
+                axisLine={{ stroke: "#3b82f6", strokeOpacity: 0.3 }}
+                tickLine={{ stroke: "#3b82f6", strokeOpacity: 0.3 }}
                 label={{
                   value: "AQI",
                   angle: -90,
                   position: "insideLeft",
-                  fill: "#64748b",
+                  fill: "#93c5fd",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -117,10 +117,13 @@ export default function ForecastChart({ aqiValue }) {
               <Tooltip
                 contentStyle={{
                   borderRadius: "12px",
-                  border: "1px solid #e2e8f0",
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+                  border: "1px solid #3b82f6",
+                  backgroundColor: "#0d1428",
+                  boxShadow: "0 8px 24px rgba(59,130,246,0.3)",
                   padding: "10px 14px",
                 }}
+                labelStyle={{ color: "#93c5fd" }}
+                itemStyle={{ color: "#fff" }}
                 labelFormatter={(hour) => `🕐 ${formatHourLabel(hour)}`}
                 formatter={(value) => [`${value} AQI`, ""]}
               />
@@ -136,11 +139,11 @@ export default function ForecastChart({ aqiValue }) {
                 dataKey="aqi"
                 stroke={lineColor}
                 strokeWidth={3}
-                dot={{ fill: lineColor, r: 4, strokeWidth: 2, stroke: "#fff" }}
+                dot={{ fill: lineColor, r: 4, strokeWidth: 2, stroke: "#0d1428" }}
                 activeDot={{
                   r: 7,
                   fill: lineColor,
-                  stroke: "#fff",
+                  stroke: "#0d1428",
                   strokeWidth: 2,
                 }}
                 animationDuration={800}

@@ -4,6 +4,8 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import CitySelector from "@/components/CitySelector";
 import AQICard from "@/components/AQICard";
+import ForecastChart from "@/components/ForecastChart";
+import SourceChart from "@/components/SourceChart";
 
 const CityMap = dynamic(() => import("@/components/CityMap"), {
   ssr: false,
@@ -76,7 +78,7 @@ export default function CityDashboard({ cities, CitySelector: Selector = CitySel
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-[#0a0f1e] space-y-6">
       <Selector
         cities={cities}
         selectedCity={selectedCityName}
@@ -86,28 +88,32 @@ export default function CityDashboard({ cities, CitySelector: Selector = CitySel
       <CityMap cities={cities} onGetAdvisory={handleCitySelect} />
 
       {loading && (
-        <div className="flex items-center justify-center gap-3 rounded-xl border border-zinc-200 bg-white px-6 py-8 text-zinc-600 shadow-sm">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-300 border-t-sky-600" />
+        <div className="flex items-center justify-center gap-3 rounded-xl border border-blue-500/30 bg-[#0d1428] px-6 py-8 text-blue-300 shadow-[0_0_30px_rgba(59,130,246,0.15)]">
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500/30 border-t-blue-400" />
           Generating AI advisory…
         </div>
       )}
 
       {error && (
-        <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+        <div className="rounded-xl border border-rose-500/30 bg-[#0d1428] px-4 py-3 text-sm text-rose-300 shadow-[0_0_20px_rgba(244,63,94,0.15)]">
           {error}
         </div>
       )}
 
       {advisory && !loading && (
-        <AQICard
-          cityName={advisory.city.name}
-          aqiValue={advisory.city.aqi}
-          riskLevel={advisory.riskLevel}
-          englishAdvice={advisory.englishAdvice}
-          hindiAdvice={advisory.hindiAdvice}
-          prediction24h={advisory.prediction24h}
-          mainSource={advisory.mainSource}
-        />
+        <div className="animate-fade-in">
+          <AQICard
+            cityName={advisory.city.name}
+            aqiValue={advisory.city.aqi}
+            riskLevel={advisory.riskLevel}
+            englishAdvice={advisory.englishAdvice}
+            hindiAdvice={advisory.hindiAdvice}
+            prediction24h={advisory.prediction24h}
+            mainSource={advisory.mainSource}
+          />
+          <ForecastChart aqiValue={advisory.city.aqi} />
+          <SourceChart mainSource={advisory.mainSource} />
+        </div>
       )}
     </div>
   );
