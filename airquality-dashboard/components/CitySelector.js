@@ -16,13 +16,13 @@ export default function CitySelector({
         id="city-selector"
         value={selectedCity ?? ""}
         onChange={(event) => onChange?.(event.target.value)}
-        className="w-full rounded-xl border border-blue-500/30 bg-[#0d1428] px-4 py-3 text-base font-medium text-white shadow-[0_0_20px_rgba(59,130,246,0.1)] transition-colors focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+        className="w-full rounded-xl border border-[#1e3a5f] bg-[#0d1428] px-4 py-3 text-base font-medium text-white shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       >
-        <option value="" disabled className="text-zinc-500">
+        <option value="" disabled className="bg-[#0d1428] text-blue-300">
           Choose a city
         </option>
         {cities.map((city) => (
-          <option key={city.name} value={city.name} className="text-zinc-900">
+          <option key={city.name} value={city.name} className="bg-[#0d1428] text-white">
             {city.name} — AQI {city.aqi}
           </option>
         ))}

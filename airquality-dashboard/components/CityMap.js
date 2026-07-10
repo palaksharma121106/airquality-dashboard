@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
 
 const INDIA_CENTER = [20.5937, 78.9629];
-const DEFAULT_ZOOM = 5;
 
 function getMarkerRadius(aqi) {
   if (aqi <= 100) return 14;
@@ -12,7 +11,16 @@ function getMarkerRadius(aqi) {
   return 22;
 }
 
-export default function CityMap({ cities = [], onGetAdvisory, className = "" }) {
+function ZoomController({ zoom }) {
+  const map = useMap();
+  useEffect(() => {
+    if (!map) return;
+    map.setView(INDIA_CENTER, zoom, { animate: true, duration: 0.5 });
+  }, [zoom, map]);
+  return null;
+}
+
+export default function CityMap({ cities = [], onGetAdvisory, zoom = 5, className = "" }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -22,7 +30,7 @@ export default function CityMap({ cities = [], onGetAdvisory, className = "" }) 
   if (!mounted) {
     return (
       <div
-        className={`flex items-center justify-center rounded-xl border border-blue-500/30 bg-[#0d1428] text-sm text-blue-300 shadow-[0_0_30px_rgba(59,130,246,0.15)] ${className}`}
+        className={`flex items-center justify-center rounded-xl bg-[#0d1428] border border-[#1e3a5f] text-sm text-blue-300 ${className}`}
         style={{ minHeight: 420 }}
       >
         Loading map…
@@ -31,15 +39,14 @@ export default function CityMap({ cities = [], onGetAdvisory, className = "" }) 
   }
 
   return (
-    <div
-      className={`h-[420px] overflow-hidden rounded-xl border border-blue-500/50 shadow-[0_0_40px_rgba(59,130,246,0.25)] ${className}`}
-    >
+    <div className={`h-full w-full overflow-hidden rounded-xl border border-[#1e3a5f] shadow-lg ${className}`}>
       <MapContainer
         center={INDIA_CENTER}
-        zoom={DEFAULT_ZOOM}
+        zoom={zoom}
         scrollWheelZoom
         className="h-full w-full"
       >
+        <ZoomController zoom={zoom} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -58,7 +65,7 @@ export default function CityMap({ cities = [], onGetAdvisory, className = "" }) 
             }}
           >
             <Popup>
-              <div className="min-w-[180px] space-y-2 rounded-xl border border-blue-500/30 bg-[#0d1428] p-3 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+              <div className="min-w-[180px] space-y-2 p-1">
                 <p className="text-base font-bold text-white">{city.name}</p>
                 <p className="text-sm text-blue-300">
                   AQI:{" "}
@@ -66,13 +73,13 @@ export default function CityMap({ cities = [], onGetAdvisory, className = "" }) 
                     {city.aqi}
                   </span>
                 </p>
-                <p className="text-xs text-blue-300">
+                <p className="text-xs text-blue-400">
                   Dominant pollutant: {city.dominantPollutant}
                 </p>
                 <button
                   type="button"
                   onClick={() => onGetAdvisory?.(city)}
-                  className="mt-2 w-full rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                  className="mt-2 w-full rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
                 >
                   Get AI Advisory
                 </button>
