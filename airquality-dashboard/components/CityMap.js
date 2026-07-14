@@ -11,16 +11,28 @@ function getMarkerRadius(aqi) {
   return 22;
 }
 
-function ZoomController({ zoom }) {
+function MapController({ center, zoom }) {
   const map = useMap();
+
   useEffect(() => {
     if (!map) return;
-    map.setView(INDIA_CENTER, zoom, { animate: true, duration: 0.5 });
-  }, [zoom, map]);
+    map.setView(center, zoom, { animate: true, duration: 0.5 });
+  }, [center[0], center[1], zoom, map]);
+
+  useEffect(() => {
+    if (!map) return;
+    const container = map.getContainer();
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, [map]);
+
   return null;
 }
 
-export default function CityMap({ cities = [], onGetAdvisory, zoom = 5, className = "" }) {
+export default function CityMap({ cities = [], onGetAdvisory, zoom = 5, center = INDIA_CENTER, className = "" }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -41,12 +53,12 @@ export default function CityMap({ cities = [], onGetAdvisory, zoom = 5, classNam
   return (
     <div className={`h-full w-full overflow-hidden rounded-xl border border-[#1e3a5f] shadow-lg ${className}`}>
       <MapContainer
-        center={INDIA_CENTER}
+        center={center}
         zoom={zoom}
         scrollWheelZoom
         className="h-full w-full"
       >
-        <ZoomController zoom={zoom} />
+        <MapController center={center} zoom={zoom} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
